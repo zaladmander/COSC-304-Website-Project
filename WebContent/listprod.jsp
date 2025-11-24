@@ -4,7 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>45's Grocery</title>
+	<%
+		String currentPage = "Products";   
+		request.setAttribute("currentPage", currentPage);
+	%>
+
+    <title>
+		<%= (request.getAttribute("currentPage") != null ? request.getAttribute("currentPage") : "") %> 
+		<%= (request.getAttribute("currentPage") != null ? " | " : "") %>
+		<%= getServletContext().getInitParameter("siteTitle") %>
+	</title>
 </head>
 <body>
 
