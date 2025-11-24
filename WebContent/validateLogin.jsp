@@ -35,7 +35,17 @@
 			getConnection();
 			
 			// TODO: Check if userId and password match some customer account. If so, set retStr to be the username.
-			retStr = "";			
+			retStr = "";	
+			String sql = "SELECT userId FROM Customer WHERE userId = ? AND password = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, username);
+			ps.setString(2, password);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				retStr = rs.getString("userId");
+			}
+			rs.close();
+			ps.close();		
 		} 
 		catch (SQLException ex) {
 			out.println(ex);

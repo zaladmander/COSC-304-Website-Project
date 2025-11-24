@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Customer Page</title>
+<title>
+		<%
+		String currentPage = "Customer Information";   
+		request.setAttribute("currentPage", currentPage);
+		%>
+
+        <%= (request.getAttribute("currentPage") != null ? request.getAttribute("currentPage") : "") %> 
+        <%= (request.getAttribute("currentPage") != null ? " - " : "") %>
+        <%= getServletContext().getInitParameter("siteTitle") %>
+    </title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
+<jsp:include page="header.jsp" />
 <%@ include file="auth.jsp"%>
 <%@ page import="java.text.NumberFormat" %>
 <%@ include file="jdbc.jsp" %>
@@ -16,9 +26,38 @@
 <%
 
 // TODO: Print Customer information
-String sql = "";
+try {
+	getConnection();
 
-// Make sure to close connection
+	String sql = "SELECT firstName, lastName, email, phonenum, address, city," +
+				" state, postalCode, country, userId, password " +
+				"FROM Customer WHERE userId = ?";
+	PreparedStatement ps = con.prepareStatement(sql);
+	ps.setString(1, userName);
+	ResultSet rs = ps.executeQuery();
+
+	if (rs.next()) {
+		out.println("<h2>Customer Information</h2>");
+		out.println("<p>Name: " + rs.getString("firstName") + " " + rs.getString("lastName") + "</p>");
+		out.println("<p>Username: " + rs.getString("userId") + "</p>");
+		out.println("<p>Password: " + rs.getString("password") + "</p>");
+		out.println("<p>Email: " + rs.getString("email") + "</p>");
+		out.println("<p>Phone: " + rs.getString("phonenum") + "</p>");
+		out.println("<p>Address: " + rs.getString("address") + ", " +
+					rs.getString("city") + ", " +
+					rs.getString("state") + " " +
+					rs.getString("postalCode") + ", " +
+					rs.getString("country") + "</p>");
+	} else {
+		out.println("<p>No customer information found.</p>");
+	}
+
+	rs.close();
+	ps.close();
+	closeConnection();
+} catch (SQLException e) {
+	out.println("<p>Error retrieving customer information: " + e + "</p>");
+}
 %>
 
 </body>
