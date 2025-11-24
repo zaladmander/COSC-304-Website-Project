@@ -11,7 +11,7 @@
 
     <title>
 		<%= (request.getAttribute("currentPage") != null ? request.getAttribute("currentPage") : "") %> 
-		<%= (request.getAttribute("currentPage") != null ? " | " : "") %>
+		<%= (request.getAttribute("currentPage") != null ? " - " : "") %>
 		<%= getServletContext().getInitParameter("siteTitle") %>
 	</title>
 </head>
