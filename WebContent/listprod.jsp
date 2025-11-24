@@ -56,7 +56,9 @@ try (Connection con = DriverManager.getConnection(url, uid, pw);)
 	if (name == null || name.trim().isEmpty())
 	{
 		// Query to get all products
-		sql = "SELECT productId, productName, productPrice FROM product ORDER BY productName;";
+		sql = "SELECT p.productId, p.productName, p.productPrice, c.categoryName " +
+				"FROM Product p JOIN Category c ON p.categoryId = c.categoryId " +
+				"ORDER BY p.productName;";
 		pstmt = con.prepareStatement(sql);
 		// H2 says All products
 		%> <h2>All Products</h2> <%
@@ -64,7 +66,10 @@ try (Connection con = DriverManager.getConnection(url, uid, pw);)
 	else
 	{
 		// Query to get products that match search string
-		sql = "SELECT productId, productName, productPrice FROM product WHERE productName LIKE ? ORDER BY productName;";
+		sql = "SELECT p.productId, p.productName, p.productPrice, c.categoryName " +
+				"FROM Product p JOIN Category c ON p.categoryId = c.categoryId " +
+				"WHERE p.productName LIKE ? " +
+				"ORDER BY p.productName;";
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, "%" + name + "%");
 		// H2 says Products matching 'name'
@@ -77,6 +82,7 @@ try (Connection con = DriverManager.getConnection(url, uid, pw);)
 	<tr>
 		<th></th>
 		<th>Product Name</th>
+		<th>Category</th>
 		<th>Price</th>
 	</tr>
 <%
@@ -89,6 +95,8 @@ try (Connection con = DriverManager.getConnection(url, uid, pw);)
 		String productId   = products.getString("productId");
 		String productName = products.getString("productName");
 		double productPrice= products.getDouble("productPrice");
+		String categoryName = products.getString("categoryName");
+
 		request.setAttribute("productId", productId);
 		request.setAttribute("productName", productName);
 		request.setAttribute("productPrice", productPrice);
@@ -100,7 +108,12 @@ try (Connection con = DriverManager.getConnection(url, uid, pw);)
 				name="${productName}"
 				price="${productPrice}" />
 		</td>
-		<td><%= productName %></td>
+		<td>
+			<a href="product.jsp?id=<%= productId %>">
+				<%= productName %>
+			</a>
+		</td>
+		<td><%= categoryName %></td>
 		<td><%= money.format(productPrice) %></td>
 	</tr>
 <%
