@@ -2,8 +2,10 @@
 <html>
 <head>
         <title><%= getServletContext().getInitParameter("siteTitle") %></title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+	<jsp:include page="header.jsp" />
 <h1 align="center">Welcome to <%= getServletContext().getInitParameter("siteTitle") %></h1>
 
 <h2 align="center"><a href="login.jsp">Login</a></h2>

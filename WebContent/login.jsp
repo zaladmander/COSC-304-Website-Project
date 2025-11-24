@@ -2,8 +2,10 @@
 <html>
 <head>
 <title>Login Screen</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+	<jsp:include page="header.jsp" />
 
 <div style="margin:0 auto;text-align:center;display:inline">
 

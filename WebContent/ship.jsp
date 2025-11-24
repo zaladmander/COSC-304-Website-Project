@@ -9,11 +9,12 @@
 
 <html>
 <head>
-<title>YOUR NAME Grocery Shipment Processing</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
         
-<%@ include file="header.jsp" %>
+<jsp:include page="header.jsp" />
 
 <%
 	// TODO: Get order id
