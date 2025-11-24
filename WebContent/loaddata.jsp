@@ -6,8 +6,10 @@
 <html>
 <head>
 <title>Loading Data</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <jsp:include page="header.jsp" />
 
 <%
 out.print("<h1>Connecting to database.</h1><br><br>");
