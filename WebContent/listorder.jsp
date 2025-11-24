@@ -4,10 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>45's Grocery Order List</title>
+<title>
+	<%
+	String currentPage = "Order List";   
+	request.setAttribute("currentPage", currentPage);
+	%>
+
+	<%= (request.getAttribute("currentPage") != null ? request.getAttribute("currentPage") : "") %> 
+	<%= (request.getAttribute("currentPage") != null ? " - " : "") %>
+	<%= getServletContext().getInitParameter("siteTitle") %>
+</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
+<jsp:include page="header.jsp" />
 <h1>Order List</h1>
 
 <%

@@ -16,7 +16,9 @@
     String productDesc = "";
     String imageUrl = null;
     byte[] productImage = null;
+    boolean hasUrl = false;
     boolean hasBlob = false;
+    boolean hasAnyImage = false;
 
     try {
 		getConnection();
@@ -36,7 +38,9 @@
                 imageUrl = rs.getString("productImageURL");
                 productImage = rs.getBytes("productImage");
                 productDesc = rs.getString("productDesc");
+                hasUrl = (imageUrl != null && !imageUrl.trim().isEmpty());
                 hasBlob = (productImage != null && productImage.length > 0);
+                hasAnyImage = hasUrl || hasBlob;
             }
 
             rs.close();
@@ -77,26 +81,42 @@
 
     <div class="row">
 
-        <!-- IMAGE COLUMN -->
         <div class="col-md-6">
+            <% if (!hasAnyImage) { %>
+                <p class="text-muted">No image available.</p>
+            <% } else if (hasUrl && hasBlob) { %>
+                <div id="productCarousel" class="carousel slide" data-ride="carousel" style="width:400px;">
+                
+                    <ol class="carousel-indicators">
+                        <li data-target="#productCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#productCarousel" data-slide-to="1"></li>
+                    </ol>
 
-            <%-- URL-based product image --%>
-            <% if (imageUrl != null && !imageUrl.isEmpty()) { %>
-                <img src="<%= imageUrl %>" class="img-fluid mb-3">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="<%= imageUrl %>" class="img-responsive">
+                        </div>
+                        <div class="item">
+                            <img src="displayImage.jsp?id=<%= productId %>" class="img-responsive">
+                        </div>
+                    </div>
+
+                    <a class="left carousel-control" href="#productCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#productCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+
+                </div>
+            <% } else if (hasUrl) { %>
+                <img src="<%= imageUrl %>" class="img-responsive">
+            <% } else { %>
+                <img src="displayImage.jsp?id=<%= productId %>" class="img-responsive">
             <% } %>
-
-            <%-- Binary DB image using displayImage.jsp --%>
-            <% if (hasBlob) { %>
-                <img src="displayImage.jsp?id=<%= productId %>" class="img-fluid mb-3">
-            <% } else if ((imageUrl == null || imageUrl.isEmpty())) { %>
-                <p>No image available.</p>
-            <% } %>
-
         </div>
 
-        <!-- INFO COLUMN -->
         <div class="col-md-6">
-
             <h3>Price:
                 <% if (productPrice != null) { %>
                     <%= money.format(productPrice) %>
@@ -109,14 +129,12 @@
                 Product ID: <%= productId %>
             </h5>
 
-
             <p class="mt-3"><%= productDesc %></p>
 
             <shop:addToCart
                 id="${productId}"
                 name="${productName}"
                 price="${productPrice}" />
-
 
             <br><br>
 
@@ -125,6 +143,9 @@
     </div>
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 </body>
 </html>
+
