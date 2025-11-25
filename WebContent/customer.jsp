@@ -25,7 +25,7 @@
 
 <%
 
-// TODO: Print Customer information
+// Print Customer information
 try {
 	getConnection();
 

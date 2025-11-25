@@ -7,10 +7,10 @@
 <%@ taglib prefix="shop" tagdir="/WEB-INF/tags" %>
 
 <%
-    // --- Retrieve product ID from query string ---
+    // retrieve product ID from query string
     String productId = request.getParameter("id");
 
-    // --- Default values (if product not found) ---
+    // default values if product not found
     String productName = "Product";
     Double productPrice = null;
     String productDesc = "";
@@ -47,9 +47,9 @@
             ps.close();
         }
 
-        // Page title → use the product name
+        // use the product name for page title
         request.setAttribute("currentPage", productName);
-
+        closeConnection();
     } catch (SQLException e) {
         out.println("<p>Error loading product: " + e + "</p>");
     }
