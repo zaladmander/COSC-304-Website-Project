@@ -1,8 +1,18 @@
 <html>
 <head>
-<title>Ray's Grocery</title>
+    <%
+		String currentPage = "Checkout";   
+		request.setAttribute("currentPage", currentPage);
+	%>
+	<title>
+		<%= (request.getAttribute("currentPage") != null ? request.getAttribute("currentPage") : "") %> 
+		<%= (request.getAttribute("currentPage") != null ? " - " : "") %>
+		<%= getServletContext().getInitParameter("siteTitle") %>
+	</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<jsp:include page="header.jsp" />
 
 <h1>Enter your customer id and password to complete the transaction:</h1>
 

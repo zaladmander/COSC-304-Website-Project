@@ -1,13 +1,26 @@
 <%@ page import="java.sql.*,java.net.URLEncoder" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
+<%@ taglib prefix="shop" tagdir="/WEB-INF/tags" %>
+<%@ include file="jdbc.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>45's Grocery</title>
+	<%
+		String currentPage = "Products";   
+		request.setAttribute("currentPage", currentPage);
+	%>
+
+    <title>
+		<%= (request.getAttribute("currentPage") != null ? request.getAttribute("currentPage") : "") %> 
+		<%= (request.getAttribute("currentPage") != null ? " - " : "") %>
+		<%= getServletContext().getInitParameter("siteTitle") %>
+	</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
+<jsp:include page="header.jsp" />
 <h1>Search for the products you want to buy:</h1>
 
 <form method="get" action="listprod.jsp">
@@ -31,20 +44,20 @@ catch (java.lang.ClassNotFoundException e)
 // Variable name now contains the search string the user entered
 // Use it to build a query and print out the resultset.  Make sure to use PreparedStatement!
 
-String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";		
-String uid = "sa";
-String pw = "304#sa#pw";
+
 NumberFormat money = NumberFormat.getCurrencyInstance();
 
 // Make the connection
-try (Connection con = DriverManager.getConnection(url, uid, pw);)
-{
+try {
+	getConnection();
 	String sql;
 	PreparedStatement pstmt;
 	if (name == null || name.trim().isEmpty())
 	{
 		// Query to get all products
-		sql = "SELECT productId, productName, productPrice FROM product ORDER BY productName;";
+		sql = "SELECT p.productId, p.productName, p.productPrice, c.categoryName " +
+				"FROM Product p JOIN Category c ON p.categoryId = c.categoryId " +
+				"ORDER BY p.productName;";
 		pstmt = con.prepareStatement(sql);
 		// H2 says All products
 		%> <h2>All Products</h2> <%
@@ -52,7 +65,10 @@ try (Connection con = DriverManager.getConnection(url, uid, pw);)
 	else
 	{
 		// Query to get products that match search string
-		sql = "SELECT productId, productName, productPrice FROM product WHERE productName LIKE ? ORDER BY productName;";
+		sql = "SELECT p.productId, p.productName, p.productPrice, c.categoryName " +
+				"FROM Product p JOIN Category c ON p.categoryId = c.categoryId " +
+				"WHERE p.productName LIKE ? " +
+				"ORDER BY p.productName;";
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, "%" + name + "%");
 		// H2 says Products matching 'name'
@@ -65,6 +81,7 @@ try (Connection con = DriverManager.getConnection(url, uid, pw);)
 	<tr>
 		<th></th>
 		<th>Product Name</th>
+		<th>Category</th>
 		<th>Price</th>
 	</tr>
 <%
@@ -77,18 +94,25 @@ try (Connection con = DriverManager.getConnection(url, uid, pw);)
 		String productId   = products.getString("productId");
 		String productName = products.getString("productName");
 		double productPrice= products.getDouble("productPrice");
+		String categoryName = products.getString("categoryName");
 
+		request.setAttribute("productId", productId);
+		request.setAttribute("productName", productName);
+		request.setAttribute("productPrice", productPrice);
 %>
 	<tr>
 		<td>
-			<a href="addcart.jsp?
-				id=<%= URLEncoder.encode(productId, "UTF-8") %> &
-				name=<%= URLEncoder.encode(productName, "UTF-8") %>&
-				price=<%= URLEncoder.encode(Double.toString(productPrice), "UTF-8") %>">
-				Add to Cart
+			<shop:addToCart
+				id="${productId}"
+				name="${productName}"
+				price="${productPrice}" />
+		</td>
+		<td>
+			<a href="product.jsp?id=<%= productId %>">
+				<%= productName %>
 			</a>
 		</td>
-		<td><%= productName %></td>
+		<td><%= categoryName %></td>
 		<td><%= money.format(productPrice) %></td>
 	</tr>
 <%

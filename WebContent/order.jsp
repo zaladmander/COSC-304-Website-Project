@@ -5,13 +5,25 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
+
+<%@ include file="jdbc.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>45 Grocery Order Processing</title>
+	<%
+		String currentPage = "Order Confirmation";   
+		request.setAttribute("currentPage", currentPage);
+	%>
+
+	<title>
+		<%= (request.getAttribute("currentPage") != null ? request.getAttribute("currentPage") : "") %> 
+		<%= (request.getAttribute("currentPage") != null ? " - " : "") %>
+		<%= getServletContext().getInitParameter("siteTitle") %>
+	</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
+<jsp:include page="header.jsp" />
 <% 
 // Get customer id
 String custId = request.getParameter("customerId");
@@ -27,17 +39,14 @@ catch (java.lang.ClassNotFoundException e)
 	out.println("ClassNotFoundException: " +e);
 }
 // Determine if valid customer id was entered (get customerId from database to verify)
-String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";		
-String uid = "sa";
-String pw = "304#sa#pw";
 
-try (Connection con = DriverManager.getConnection(url, uid, pw);)
-{
+try {
+	getConnection();
 	String custSql = "SELECT COUNT(*) AS custCount FROM customer WHERE customerId = ?;";
 	PreparedStatement custPstmt = con.prepareStatement(custSql);
 	// check custId is integer before setting parameter
-	if (!custId.matches("\\d+")) {
-	    custId = "-1"; // set to invalid id
+	if (custId == null || custId.trim().isEmpty() || !custId.matches("\\d+")) {
+		custId = "-1";
 	}
 	custPstmt.setString(1, custId);
 	ResultSet custRs = custPstmt.executeQuery();
@@ -152,6 +161,8 @@ try (Connection con = DriverManager.getConnection(url, uid, pw);)
 
 		} // End else order summary inserted
 	} // End else valid customer id and products in cart
+	custRs.close();
+	custPstmt.close();
 } // End try con
 catch (SQLException e)
 {

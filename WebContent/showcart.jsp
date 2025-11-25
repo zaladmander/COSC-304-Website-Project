@@ -8,9 +8,10 @@
 <html>
 <head>
 <title>Your Shopping Cart</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
+<jsp:include page="header.jsp" />
 <%
 // Get the current list of products
 @SuppressWarnings({"unchecked"})

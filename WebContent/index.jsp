@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title>Ray's Grocery Main Page</title>
+        <title><%= getServletContext().getInitParameter("siteTitle") %></title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1 align="center">Welcome to Ray's Grocery</h1>
+	<jsp:include page="header.jsp" />
+<h1 align="center">Welcome to <%= getServletContext().getInitParameter("siteTitle") %></h1>
 
 <h2 align="center"><a href="login.jsp">Login</a></h2>
 

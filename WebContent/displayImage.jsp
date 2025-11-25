@@ -1,4 +1,7 @@
-<%@ page trimDirectiveWhitespaces="true" import="java.sql.*,java.io.*" %><%@ include file="jdbc.jsp" %><%
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ page import="java.sql.*, java.io.*" %>
+<%@ include file="jdbc.jsp" %>
+<%
 
 // Indicate that we are sending a JPG picture
 response.setContentType("image/jpeg");  
@@ -35,6 +38,10 @@ try
 	{
 		// Copy stream of bytes from database to output stream for JSP/Servlet
 		InputStream istream = rst.getBinaryStream(1);
+		if (istream == null) {
+			// no binary image stored for this product
+			return;
+}
 		OutputStream ostream = response.getOutputStream();
 
 		int count;
