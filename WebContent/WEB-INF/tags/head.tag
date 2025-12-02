@@ -7,3 +7,4 @@
 </title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/shop.css" rel="stylesheet">
