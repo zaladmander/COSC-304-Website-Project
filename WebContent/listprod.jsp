@@ -88,12 +88,6 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/header.jsp" />
-<h1>Search for the products you want to buy:</h1>
-
-<form method="get" action="listprod.jsp">
-<input type="text" name="productName" size="50">
-<input type="submit" value="Submit"><input type="reset" value="Reset"> (Leave blank for all products)
-</form>
 
 <% // Get product name to search for
 String name = request.getParameter("productName");
