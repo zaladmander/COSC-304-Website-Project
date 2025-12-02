@@ -1,25 +1,17 @@
 <%@ include file="/WEB-INF/jdbc.jsp" %>
 <%@ include file="/WEB-INF/auth.jsp"%>
 
+<%@ taglib prefix="shop" tagdir="/WEB-INF/tags" %>
+
 <%@ page import="java.text.NumberFormat" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>
-		<%
-		String currentPage = "Customer Information";   
-		request.setAttribute("currentPage", currentPage);
-		%>
-
-        <%= (request.getAttribute("currentPage") != null ? request.getAttribute("currentPage") : "") %> 
-        <%= (request.getAttribute("currentPage") != null ? " - " : "") %>
-        <%= getServletContext().getInitParameter("siteTitle") %>
-    </title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
+    <shop:headContent pageTitle="Customer Information" />
 </head>
 <body>
-<jsp:include page="header.jsp" />
+	<jsp:include page="/WEB-INF/header.jsp" />
 
 <%
 	String userName = (String) session.getAttribute("authenticatedUser");

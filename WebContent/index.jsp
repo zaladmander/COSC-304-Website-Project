@@ -1,11 +1,12 @@
+<%@ taglib prefix="shop" tagdir="/WEB-INF/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-        <title><%= getServletContext().getInitParameter("siteTitle") %></title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
+	<shop:headContent pageTitle="Welcome" />
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="/WEB-INF/header.jsp" />
 <h1 align="center">Welcome to <%= getServletContext().getInitParameter("siteTitle") %></h1>
 
 <h2 align="center"><a href="listprod.jsp">Begin Shopping</a></h2>

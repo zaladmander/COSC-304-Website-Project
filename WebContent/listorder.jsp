@@ -1,24 +1,17 @@
+<%@ taglib prefix="shop" tagdir="/WEB-INF/tags" %>
+
 <%@ page import="java.sql.*" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>
-	<%
-	String currentPage = "Order List";   
-	request.setAttribute("currentPage", currentPage);
-	%>
-
-	<%= (request.getAttribute("currentPage") != null ? request.getAttribute("currentPage") : "") %> 
-	<%= (request.getAttribute("currentPage") != null ? " - " : "") %>
-	<%= getServletContext().getInitParameter("siteTitle") %>
-</title>
+	<shop:headContent pageTitle="Order List" />
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="header.jsp" />
-<h1>Order List</h1>
+	<jsp:include page="/WEB-INF/header.jsp" />
+	<h1>Order List</h1>
 
 <%
 //Note: Forces loading of SQL Server driver

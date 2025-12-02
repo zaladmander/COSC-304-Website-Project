@@ -1,26 +1,18 @@
 <%@ include file="/WEB-INF/jdbc.jsp" %>
 <%@ include file="/WEB-INF/auth.jsp" %>
 
+<%@ taglib prefix="shop" tagdir="/WEB-INF/tags" %>
+
 <%@ page import="java.sql.*" %>
 <%@ page import="java.text.NumberFormat" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <%
-        String currentPage = "Sales Report";   
-        request.setAttribute("currentPage", currentPage);
-	%>
-
-    <title>
-		<%= (request.getAttribute("currentPage") != null ? request.getAttribute("currentPage") : "") %> 
-		<%= (request.getAttribute("currentPage") != null ? " - " : "") %>
-		<%= getServletContext().getInitParameter("siteTitle") %>
-	</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+    <shop:head pageName="Sales Report" />
 </head>
 <body>
-<jsp:include page="header.jsp" />
+    <jsp:include page="/WEB-INF/header.jsp" />
 
 <h1 class="text-center mt-4 mb-3">Admin Sales Report by Day</h1>
 <div class="container mt-3">

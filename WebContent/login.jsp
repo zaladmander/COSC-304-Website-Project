@@ -1,11 +1,12 @@
+<%@ taglib prefix="shop" tagdir="/WEB-INF/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>Login Screen</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
+	<shop:headContent pageTitle="Login" />
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="/WEB-INF/header.jsp" />
 
 <div style="margin:0 auto;text-align:center;display:inline">
 

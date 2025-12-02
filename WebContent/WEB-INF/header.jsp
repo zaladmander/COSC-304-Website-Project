@@ -8,7 +8,6 @@
 <nav class="navbar navbar-default" style="margin-bottom: 20px;">
   <div class="container">
 
-    <!-- Brand / title -->
     <div class="navbar-header">
       <a class="navbar-brand" href="index.jsp" style="font-family:cursive; color:#3399FF;">
         <%= getServletContext().getInitParameter("siteTitle") %>

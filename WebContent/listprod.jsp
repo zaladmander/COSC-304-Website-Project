@@ -87,7 +87,7 @@
 	</style>
 </head>
 <body>
-<jsp:include page="header.jsp" />
+	<jsp:include page="/WEB-INF/header.jsp" />
 <h1>Search for the products you want to buy:</h1>
 
 <form method="get" action="listprod.jsp">
