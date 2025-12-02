@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <shop:headContent pageTitle="Customer Information" />
+    <shop:head pageName="Customer Information" />
 </head>
 <body>
 	<jsp:include page="/WEB-INF/header.jsp" />

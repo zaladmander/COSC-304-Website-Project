@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<shop:headContent pageTitle="Order Confirmation" />
+	<shop:head pageName="Order Confirmation" />
 </head>
 <body>
 	<jsp:include page="/WEB-INF/header.jsp" />

@@ -6,8 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<shop:headContent pageTitle="Order List" />
-<link href="css/bootstrap.min.css" rel="stylesheet">
+	<shop:head pageName="Order List" />
 </head>
 <body>
 	<jsp:include page="/WEB-INF/header.jsp" />

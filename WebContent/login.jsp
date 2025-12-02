@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<shop:headContent pageTitle="Login" />
+	<shop:head pageName="Login" />
 </head>
 <body>
 	<jsp:include page="/WEB-INF/header.jsp" />

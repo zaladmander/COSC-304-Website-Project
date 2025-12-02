@@ -8,7 +8,7 @@
 
 <html>
 <head>
-    <shop:headContent pageTitle="Load Data" />
+    <shop:head pageName="Load Data" />
 </head>
 <body>
     <jsp:include page="/WEB-INF/header.jsp" />
