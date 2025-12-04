@@ -1,3 +1,7 @@
+<%@ include file="/WEB-INF/jdbc.jsp" %>
+
+<%@ taglib prefix="shop" tagdir="/WEB-INF/tags" %>
+    
 <%@ page import="java.sql.*" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.HashMap" %>
@@ -5,24 +9,13 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Date" %>
-<%@ include file="jdbc.jsp" %>
 
 <html>
 <head>
-	<%
-		String currentPage = "Shipping";   
-		request.setAttribute("currentPage", currentPage);
-	%>
-
-	<title>
-		<%= (request.getAttribute("currentPage") != null ? request.getAttribute("currentPage") : "") %> 
-		<%= (request.getAttribute("currentPage") != null ? " - " : "") %>
-		<%= getServletContext().getInitParameter("siteTitle") %>
-	</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
+	<shop:head pageName="Shipment Processing" />
 </head>
 <body>
-<jsp:include page="header.jsp" />
+    <jsp:include page="/WEB-INF/header.jsp" />
 
 <%
     String orderId = request.getParameter("orderId");

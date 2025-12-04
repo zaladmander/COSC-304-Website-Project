@@ -1,6 +1,7 @@
+<%@ include file="/WEB-INF/jdbc.jsp" %>
+	
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page import="java.sql.*, java.io.*" %>
-<%@ include file="jdbc.jsp" %>
 <%
 
 // Indicate that we are sending a JPG picture

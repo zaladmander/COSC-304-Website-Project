@@ -1,5 +1,6 @@
+<%@ include file="/WEB-INF/jdbc.jsp" %>
+
 <%@ page language="java" import="java.io.*,java.sql.*"%>
-<%@ include file="jdbc.jsp" %>
 <%
 	String authenticatedUser = null;
 	session = request.getSession(true);

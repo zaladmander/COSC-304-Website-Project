@@ -1,10 +1,12 @@
+<%@ include file="/WEB-INF/jdbc.jsp" %>
+
+<%@ taglib prefix="shop" tagdir="/WEB-INF/tags" %>
+
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
-<%@ include file="jdbc.jsp" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.sql.*,java.net.URLEncoder" %>
-<%@ taglib prefix="shop" tagdir="/WEB-INF/tags" %>
 
 <%
     // retrieve product ID from query string
@@ -55,17 +57,13 @@
     }
 %>
 
+<!DOCTYPE html>
 <html>
 <head>
-    <title>
-        <%= (request.getAttribute("currentPage") != null ? request.getAttribute("currentPage") : "") %> 
-        <%= (request.getAttribute("currentPage") != null ? " - " : "") %>
-        <%= getServletContext().getInitParameter("siteTitle") %>
-    </title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
+    <shop:head pageName="${currentPage}" />
 </head>
 <body>
-<jsp:include page="header.jsp" />
+    <jsp:include page="/WEB-INF/header.jsp" />
 
 <%
     NumberFormat money = NumberFormat.getCurrencyInstance();

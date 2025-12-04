@@ -1,15 +1,17 @@
+<%@ include file="/WEB-INF/jdbc.jsp" %>
+
+<%@ taglib prefix="shop" tagdir="/WEB-INF/tags" %>
+
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.Scanner" %>
 <%@ page import="java.io.File" %>
-<%@ include file="jdbc.jsp" %>
 
 <html>
 <head>
-<title>Loading Data</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
+    <shop:head pageName="Load Data" />
 </head>
 <body>
-    <jsp:include page="header.jsp" />
+    <jsp:include page="/WEB-INF/header.jsp" />
 
 <%
 out.print("<h1>Connecting to database.</h1><br><br>");

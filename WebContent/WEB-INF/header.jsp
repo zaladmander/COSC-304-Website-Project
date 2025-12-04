@@ -6,26 +6,35 @@
 %>
 
 <nav class="navbar navbar-default" style="margin-bottom: 20px;">
-  <div class="container">
+  <div class="container-fluid" style="display: flex; align-items: center; justify-content: space-between;">
 
-    <!-- Brand / title -->
     <div class="navbar-header">
       <a class="navbar-brand" href="index.jsp" style="font-family:cursive; color:#3399FF;">
         <%= getServletContext().getInitParameter("siteTitle") %>
       </a>
     </div>
 
-    <ul class="nav navbar-nav navbar-right">
+    <div style="flex: 1; padding: 0 40px;">
+      <jsp:include page="/WEB-INF/searchBar.jsp" />
+    </div>
+
+    <ul class="nav navbar-nav navbar-right" style="margin: 0;">
       <li><a href="index.jsp">Home</a></li>
       <li><a href="listprod.jsp">Products</a></li>
       <li><a href="showcart.jsp">Cart</a></li>
 
-      <% if (loggedIn) { %>
+      <% 
+        if (loggedIn) { 
+      %>
           <li><a href="customer.jsp"><%= loggedInUser %></a></li>
           <li><a href="logout.jsp">Logout</a></li>
-      <% } else { %>
+      <% 
+        } else { 
+      %>
           <li><a href="login.jsp">Login</a></li>
-      <% } %>
+      <% 
+        }
+      %>
     </ul>
 
   </div>

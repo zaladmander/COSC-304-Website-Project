@@ -1,24 +1,19 @@
+<%@ taglib prefix="shop" tagdir="/WEB-INF/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-        <title><%= getServletContext().getInitParameter("siteTitle") %></title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
+	<shop:head pageName="Welcome" />
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+	<jsp:include page="/WEB-INF/header.jsp" />
 <h1 align="center">Welcome to <%= getServletContext().getInitParameter("siteTitle") %></h1>
-
-<h2 align="center"><a href="login.jsp">Login</a></h2>
 
 <h2 align="center"><a href="listprod.jsp">Begin Shopping</a></h2>
 
 <h2 align="center"><a href="listorder.jsp">List All Orders</a></h2>
 
-<h2 align="center"><a href="customer.jsp">Customer Info</a></h2>
-
 <h2 align="center"><a href="admin.jsp">Administrators</a></h2>
-
-<h2 align="center"><a href="logout.jsp">Log out</a></h2>
 
 <%
 	String userName = (String) session.getAttribute("authenticatedUser");
