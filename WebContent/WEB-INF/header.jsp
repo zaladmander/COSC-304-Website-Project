@@ -23,35 +23,20 @@
       <li><a href="listprod.jsp">Products</a></li>
       <li><a href="showcart.jsp">Cart</a></li>
 
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle"
-            data-toggle="dropdown"
-            role="button"
-            aria-haspopup="true"
-            aria-expanded="false">
-            <%= (loggedInUser != null ? loggedInUser : "Account") %> <span class="caret"></span>
-        </a>
-
-        <ul class="dropdown-menu dropdown-menu-right">
-            <% if (loggedInUser == null) { %>
-                <!-- Not logged in: show login + create account -->
-                <li><a href="login.jsp">Sign in</a></li>
-                <li><a href="createAccount.jsp">Create account</a></li>
-            <% } else { %>
-                <!-- Logged in: show account-related stuff -->
-                <li><a href="customer.jsp">Account details</a></li>
-                <!-- replace list order with personal order history -->
-                <!-- <li><a href="listorder.jsp">Order status</a></li> -->
-                <li role="separator" class="divider"></li>
-                <li><a href="logout.jsp">Logout</a></li>
-            <% } %>
-        </ul>
-      </li>
+      <% 
+        if (loggedIn) { 
+      %>
+          <li><a href="customer.jsp"><%= loggedInUser %></a></li>
+          <li><a href="logout.jsp">Logout</a></li>
+      <% 
+        } else { 
+      %>
+          <li><a href="login.jsp">Login</a></li>
+      <% 
+        }
+      %>
     </ul>
 
   </div>
 </nav>
 <hr/>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
