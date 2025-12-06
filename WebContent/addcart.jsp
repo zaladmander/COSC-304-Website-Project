@@ -35,4 +35,5 @@ else
 
 session.setAttribute("productList", productList);
 %>
+<jsp:include page="/WEB-INF/syncCart.jsp" />
 <jsp:forward page="showcart.jsp" />
