@@ -5,6 +5,12 @@
 
 <%
     String userId = request.getParameter("userId");
+
+    if (userId == null || userId.trim().isEmpty()) {
+        out.println("<p>Invalid user ID.</p>");
+        return;
+    }
+
     NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
     PreparedStatement pstmt = null;
@@ -25,7 +31,15 @@
         pstmt.setString(1, userId);
         rs = pstmt.executeQuery();
 %>
-
+<%
+        if (!rs.next()) {
+            out.println("<p>You have no orders.</p>");
+            rs.close();
+            pstmt.close();
+            closeConnection();
+            return;
+        }
+%>
 <table border="1" cellpadding="5" cellspacing="0">
     <tr>
         <th>Order #</th>
@@ -33,8 +47,7 @@
         <th>Total</th>
         <th>Ship To</th>
     </tr>
-
-<%
+<%  
         do {
             int orderId = rs.getInt("orderId");
 %>
