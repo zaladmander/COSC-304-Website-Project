@@ -106,6 +106,7 @@
         errors.add("Error updating account info: " + e.getMessage());
         request.setAttribute("editErrors", errors);
         request.getRequestDispatcher("editUserInfo.jsp").forward(request, response);
+        return;
     } finally {
         closeConnection();
     }
