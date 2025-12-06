@@ -40,6 +40,11 @@
                 <a href="listsales.jsp" class="list-group-item list-group-item-action">
                     Sales Report
                 </a>
+
+                <a href="ship.jsp?orderId=1">Test Ship orderId=1</a>
+
+                <a href="ship.jsp?orderId=3">Test Ship orderId=3</a>
+
             </div>
 
         </div>
