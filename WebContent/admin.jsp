@@ -14,6 +14,15 @@
 <body>
     <jsp:include page="/WEB-INF/header.jsp" />
 
+<!-- redirect if not admin -->
+<%
+    String username = (String) session.getAttribute("authenticatedUser");
+    if (username == null || !username.equals("admin304")) {
+        response.sendRedirect("index.jsp");
+        return;
+    }
+%>
+
 <h1 class="text-center mt-4 mb-3">Admin Sales Report by Day</h1>
 <div class="container mt-3">
     <div class="row justify-content-center">

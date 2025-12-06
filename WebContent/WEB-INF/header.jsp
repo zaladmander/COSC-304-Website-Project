@@ -45,6 +45,9 @@
                 <li><a href="customer.jsp">Account details</a></li>
                 <!-- replace list order with personal order history -->
                 <li><a href="userOrders.jsp">Order history</a></li>
+                <% if ("admin304".equals(loggedInUser)) { %>
+                    <li><a href="admin.jsp">Admin panel</a></li>
+                <% } %>
                 <li role="separator" class="divider"></li>
                 <li><a href="logout.jsp">Logout</a></li>
             <% } %>
