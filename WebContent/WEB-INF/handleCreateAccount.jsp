@@ -2,10 +2,11 @@
 <%@ include file="/WEB-INF/jdbc.jsp" %>
 
 <%
-    // Only do anything on POST
     if (!"POST".equalsIgnoreCase(request.getMethod())) {
         return;
     }
+%>
+<%
 
     request.setCharacterEncoding("UTF-8");
 

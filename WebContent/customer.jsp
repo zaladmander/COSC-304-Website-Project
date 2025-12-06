@@ -1,5 +1,6 @@
 <%@ include file="/WEB-INF/jdbc.jsp" %>
 <%@ include file="/WEB-INF/auth.jsp"%>
+<%@ include file="/WEB-INF/escapeHTML.jsp" %>
 
 <%@ taglib prefix="shop" tagdir="/WEB-INF/tags" %>
 
@@ -18,7 +19,6 @@
 %>
 
 <%
-
 // Print Customer information
 try {
 	getConnection();
@@ -30,27 +30,44 @@ try {
 	ps.setString(1, userName);
 	ResultSet rs = ps.executeQuery();
 
-	if (rs.next()) {
-		out.println("<h2>Customer Information</h2>");
-		out.println("<p>Id: " + rs.getString("customerId") + "</p>");
-		out.println("<p>Name: " + rs.getString("firstName") + " " + rs.getString("lastName") + "</p>");
-		out.println("<p>Username: " + rs.getString("userId") + "</p>");
-		out.println("<p>Email: " + rs.getString("email") + "</p>");
-		out.println("<p>Phone: " + rs.getString("phonenum") + "</p>");
-		out.println("<p>Address: " + rs.getString("address") + ", " +
-					rs.getString("city") + ", " +
-					rs.getString("state") + " " +
-					rs.getString("postalCode") + ", " +
-					rs.getString("country") + "</p>");
-	} else {
-		out.println("<p>No customer information found.</p>");
-	}
+	if (rs.next()) { %>
+	<div class='container mt-4'>
+		<div class='row'>
+			<div class='col-md-8 col-lg-6 mx-auto'>
 
+			<div class='d-flex justify-content-between align-items-center mb-3'>
+				<h2 class='mb-0'>Customer Information</h2>
+				<form action='editUserInfo.jsp' method='get' class='mb-0'>
+					<button type='submit' class='btn btn-outline-primary btn-sm'>Edit info</button>
+				</form>
+			</div>
+
+			<p><strong>Id:</strong> <%= rs.getInt("customerId") %></p>
+			<p><strong>Name:</strong> <%= escapeHtml(rs.getString("firstName")) %> <%= escapeHtml(rs.getString("lastName")) %></p>
+			<p><strong>Username:</strong> <%= escapeHtml(rs.getString("userId")) %></p>
+			<p><strong>Email:</strong> <%= escapeHtml(rs.getString("email")) %></p>
+			<p><strong>Phone:</strong> <%= escapeHtml(rs.getString("phonenum")) %></p>
+			<p><strong>Address:</strong> <%= escapeHtml(rs.getString("address")) %>, <%= escapeHtml(rs.getString("city")) %>, <%= escapeHtml(rs.getString("state")) %> <%= escapeHtml(rs.getString("postalCode")) %>, <%= escapeHtml(rs.getString("country")) %></p>
+
+			</div>
+		</div>
+	</div>
+<% } else { %>
+	<div class='container mt-4'>
+		<div class='row'>
+			<div class='col-md-8 col-lg-6 mx-auto'>
+				<p>No customer information found.</p>
+			</div>
+		</div>
+	</div>
+<% } %>
+<%
 	rs.close();
 	ps.close();
-	closeConnection();
 } catch (SQLException e) {
-	out.println("<p>Error retrieving customer information: " + e + "</p>");
+	out.println("<p>Error retrieving customer information: " + escapeHtml(e.getMessage()) + "</p>");
+} finally {
+	closeConnection();
 }
 %>
 

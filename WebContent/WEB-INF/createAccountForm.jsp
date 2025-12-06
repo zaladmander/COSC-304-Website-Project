@@ -1,3 +1,5 @@
+<%@ include file="/WEB-INF/escapeHTML.jsp" %>
+
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
@@ -6,20 +8,6 @@
 
     java.util.List errors = (java.util.List) request.getAttribute("caErrors");
 %>
-
-<%!
-    private String escapeHtml(String s) {
-        if (s == null) return "";
-        // order matters: escape & first
-        s = s.replace("&", "&amp;");
-        s = s.replace("<", "&lt;");
-        s = s.replace(">", "&gt;");
-        s = s.replace("\"", "&quot;");
-        s = s.replace("'", "&#x27;");
-        return s;
-    }
-%>
-
 
 <div class="create-account">
     <% if (created) { %>
