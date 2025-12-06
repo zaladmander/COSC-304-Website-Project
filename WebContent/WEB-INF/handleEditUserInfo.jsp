@@ -103,7 +103,8 @@
         ps.close();
         updated = true;
     } catch (SQLException e) {
-        errors.add("Error updating account info: " + e.getMessage());
+        errors.add("Unable to update account information. Please try again.");
+        System.err.println("SQL error updating account info for user " + userName + ": " + e.getMessage());
         request.setAttribute("editErrors", errors);
         request.getRequestDispatcher("editUserInfo.jsp").forward(request, response);
         return;
