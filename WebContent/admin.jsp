@@ -18,7 +18,11 @@
 <%
     String username = (String) session.getAttribute("authenticatedUser");
     if (username == null || !username.equals("admin304")) {
-        response.sendRedirect("index.jsp");
+%>
+    <script>
+        window.location.href = "index.jsp";
+    </script>
+<%
         return;
     }
 %>
