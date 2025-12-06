@@ -49,10 +49,32 @@
     if (password == null || password.trim().isEmpty())
         errors.add("Password is required.");
 
+    // maximum length validation
+    if (firstName != null && firstName.length() > 50)
+        errors.add("First name must be at most 50 characters.");
+    if (lastName != null && lastName.length() > 50)
+        errors.add("Last name must be at most 50 characters.");
+    if (email != null && email.length() > 100)
+        errors.add("Email must be at most 100 characters.");
+    if (phonenum != null && phonenum.length() > 20)
+        errors.add("Phone number must be at most 20 characters.");
+    if (address != null && address.length() > 100)
+        errors.add("Address must be at most 100 characters.");
+    if (city != null && city.length() > 50)
+        errors.add("City must be at most 50 characters.");
+    if (state != null && state.length() > 50)
+        errors.add("State must be at most 50 characters.");
+    if (postalCode != null && postalCode.length() > 20)
+        errors.add("Postal code must be at most 20 characters.");
+    if (country != null && country.length() > 50)
+        errors.add("Country must be at most 50 characters.");
+    if (userid != null && userid.length() > 50)
+        errors.add("User ID must be at most 50 characters.");
+    if (password != null && password.length() > 100)
+        errors.add("Password must be at most 100 characters.");
+        
     // extra validation for email, phonenum, password strength, etc
-
-    // use regex for email validation
-    if (email != null && !email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+    if (email != null && !email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
         errors.add("Email format is invalid.");
     }
     // use regex for phone number validation (simple US format example)
@@ -60,8 +82,8 @@
         errors.add("Phone number format is invalid.");
     }
     // password strength check (at least 6 characters, 1 number, 1 special character)
-    if (password != null && !password.matches("^(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}$")) {
-        errors.add("Password must be at least 6 characters long and include at least one number and one special character.");
+    if (password != null && !password.matches("^(?=.*[0-9])(?=.*[!@#$%^&*()\\[\\]{}~\\-_=+;:'\",.<>?/|\\\\]).{6,}$")) {
+        errors.add("Password must be at least 6 characters long and include at least one number and one special character (e.g. !@#$%^&*()[]{}~-_=+;:'\",.<>?/|\\).");
     }
 
 
@@ -75,10 +97,21 @@
             checkStmt.setString(1, userid);
             ResultSet rs = checkStmt.executeQuery();
             if (rs.next() && rs.getInt(1) > 0) {
-                errors.add("That user id is already taken.");
+                errors.add("Account creation failed. Please try a different username.");
             }
             rs.close();
             checkStmt.close();
+
+            // check duplicate email
+            String checkEmailSql = "SELECT COUNT(*) FROM customer WHERE email = ?";
+            PreparedStatement checkEmailStmt = con.prepareStatement(checkEmailSql);
+            checkEmailStmt.setString(1, email);
+            ResultSet rsEmail = checkEmailStmt.executeQuery();
+            if (rsEmail.next() && rsEmail.getInt(1) > 0) {
+                errors.add("An account with that email address already exists.");
+            }
+            rsEmail.close();
+            checkEmailStmt.close();
 
             if (errors.isEmpty()) {
                 String sql = "INSERT INTO customer " +
@@ -107,7 +140,9 @@
             }
 
         } catch (SQLException e) {
-            errors.add("Database error: " + e.getMessage());
+            // Log the detailed error server-side
+            System.err.println("Database error while creating account: " + e.getMessage());
+            errors.add("An error occurred while creating your account. Please try again later.");
         } finally {
             try { closeConnection(); } catch (Exception ignore) {}
         }

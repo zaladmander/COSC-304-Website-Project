@@ -3,6 +3,11 @@
 <%
     String loggedInUser = (String) session.getAttribute("authenticatedUser");
     boolean loggedIn = (loggedInUser != null);
+
+    String safeUser = request.getParameter("userid");
+    if (safeUser != null) {
+        safeUser = safeUser.replace("<", "&lt;").replace(">", "&gt;");
+    }
 %>
 
 <nav class="navbar navbar-default" style="margin-bottom: 20px;">
@@ -29,7 +34,7 @@
             role="button"
             aria-haspopup="true"
             aria-expanded="false">
-            <%= (loggedInUser != null ? loggedInUser : "Account") %> <span class="caret"></span>
+            <%= (safeUser != null ? safeUser : "Account") %> <span class="caret"></span>
         </a>
 
         <ul class="dropdown-menu dropdown-menu-right">
@@ -51,6 +56,6 @@
 
   </div>
 </nav>
-<hr/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<hr/>

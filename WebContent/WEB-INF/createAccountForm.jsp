@@ -7,11 +7,25 @@
     java.util.List errors = (java.util.List) request.getAttribute("caErrors");
 %>
 
+<%!
+    private String escapeHtml(String s) {
+        if (s == null) return "";
+        // order matters: escape & first
+        s = s.replace("&", "&amp;");
+        s = s.replace("<", "&lt;");
+        s = s.replace(">", "&gt;");
+        s = s.replace("\"", "&quot;");
+        s = s.replace("'", "&#x27;");
+        return s;
+    }
+%>
+
+
 <div class="create-account">
     <% if (created) { %>
         <div class="alert alert-success">
             Account created successfully. You are now logged in as
-            <strong><%= request.getParameter("userid") %></strong>.
+            <strong><%= escapeHtml(request.getParameter("userid")) %></strong>.
         </div>
         <p><a href="index.jsp" class="btn btn-primary">Continue shopping</a></p>
     <% } else { %>
@@ -30,66 +44,68 @@
         <form method="post" action="createAccount.jsp">
             <div class="row g-3">
                 <div class="col-md-6">
-                    <label class="form-label">First name</label>
-                    <input class="form-control" name="firstName"
-                           value="<%= request.getParameter("firstName") != null ? request.getParameter("firstName") : "" %>">
+                    <label class="form-label" for="firstName">First name</label>
+                    <input class="form-control" id="firstName" name="firstName"
+                           value="<%= escapeHtml(request.getParameter("firstName")) %>"
+                           required>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Last name</label>
-                    <input class="form-control" name="lastName"
-                           value="<%= request.getParameter("lastName") != null ? request.getParameter("lastName") : "" %>">
+                    <label class="form-label" for="lastName">Last name</label>
+                    <input class="form-control" id="lastName" name="lastName"
+                           value="<%= escapeHtml(request.getParameter("lastName")) %>"
+                           required>
                 </div>
-
                 <div class="col-md-6">
-                    <label class="form-label">Email</label>
-                    <input class="form-control" name="email"
-                           value="<%= request.getParameter("email") != null ? request.getParameter("email") : "" %>">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-control" id="email" name="email"
+                           value="<%= escapeHtml(request.getParameter("email")) %>"
+                           required>
                 </div>
-
                 <div class="col-md-6">
-                    <label class="form-label">Phone Number</label>
-                    <input class="form-control" name="phonenum"
-                           value="<%= request.getParameter("phonenum") != null ? request.getParameter("phonenum") : "" %>">
+                    <label class="form-label" for="phonenum">Phone Number</label>
+                    <input class="form-control" id="phonenum" name="phonenum"
+                           value="<%= escapeHtml(request.getParameter("phonenum")) %>"
+                           required>
                 </div>
-
                 <div class="col-md-6">
-                    <label class="form-label">Address</label>
-                    <input class="form-control" name="address"
-                           value="<%= request.getParameter("address") != null ? request.getParameter("address") : "" %>">
+                    <label class="form-label" for="address">Address</label>
+                    <input class="form-control" id="address" name="address"
+                           value="<%= escapeHtml(request.getParameter("address")) %>"
+                           required>
                 </div>
-
                 <div class="col-md-6">
-                    <label class="form-label">City</label>
-                    <input class="form-control" name="city"
-                           value="<%= request.getParameter("city") != null ? request.getParameter("city") : "" %>">
+                    <label class="form-label" for="city">City</label>
+                    <input class="form-control" id="city" name="city"
+                           value="<%= escapeHtml(request.getParameter("city")) %>"
+                           required>
                 </div>
-
                 <div class="col-md-4">
-                    <label class="form-label">State</label>
-                    <input class="form-control" name="state"
-                           value="<%= request.getParameter("state") != null ? request.getParameter("state") : "" %>">
+                    <label class="form-label" for="state">State</label>
+                    <input class="form-control" id="state" name="state"
+                           value="<%= escapeHtml(request.getParameter("state")) %>"
+                            required>
                 </div>
-
                 <div class="col-md-4">
-                    <label class="form-label">Postal Code</label>
-                    <input class="form-control" name="postalCode"
-                           value="<%= request.getParameter("postalCode") != null ? request.getParameter("postalCode") : "" %>">
+                    <label class="form-label" for="postalCode">Postal Code</label>
+                    <input class="form-control" id="postalCode" name="postalCode"
+                           value="<%= escapeHtml(request.getParameter("postalCode")) %>"
+                           required>
                 </div>
-
                 <div class="col-md-4">
-                    <label class="form-label">Country</label>
-                    <input class="form-control" name="country"
-                           value="<%= request.getParameter("country") != null ? request.getParameter("country") : "" %>">
-                </div>
-
-                <div class="col-md-3">
-                    <label class="form-label">Username</label>
-                    <input class="form-control" name="userid"
-                           value="<%= request.getParameter("userid") != null ? request.getParameter("userid") : "" %>">
+                    <label class="form-label" for="country">Country</label>
+                    <input class="form-control" id="country" name="country"
+                           value="<%= escapeHtml(request.getParameter("country")) %>"
+                           required>
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control" name="password">
+                    <label class="form-label" for="userid">Username</label>
+                    <input class="form-control" id="userid" name="userid"
+                           value="<%= escapeHtml(request.getParameter("userid")) %>"
+                           required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
                 </div>
 
             </div>
