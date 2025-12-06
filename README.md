@@ -69,11 +69,14 @@ After adding manga to your cart, you can click the check out button to place an 
 
 A customer can also click on their account name in the header, which brings down a drop-down menu. From there, they can click on “Account details” to check out their personal information. They can make edits by clicking the button “Edit info.” A customer can also check their personal orders in the same dropdown menu mentioned before, by clicking “Order history.”
 
-![Customer personal order list](https://github.com/zaladmander/COSC-304-Website-Project/blob/main/walkthrough-images/Screenshot%202025-12-06%20at%2012.08.13%E2%80%AFAM.png)
+![Customer info page](https://github.com/zaladmander/COSC-304-Website-Project/blob/main/walkthrough-images/Screenshot%202025-12-06%20at%2012.40.26%E2%80%AFAM.png)
 
 ![Customer personal account information](https://github.com/zaladmander/COSC-304-Website-Project/blob/main/walkthrough-images/Screenshot%202025-12-06%20at%2012.09.58%E2%80%AFAM.png)
 
 ![Modifying password validation failure](https://github.com/zaladmander/COSC-304-Website-Project/blob/main/walkthrough-images/Screenshot%202025-12-06%20at%2012.10.05%E2%80%AFAM.png)
+
+![Customer personal order list](https://github.com/zaladmander/COSC-304-Website-Project/blob/main/walkthrough-images/Screenshot%202025-12-06%20at%2012.08.13%E2%80%AFAM.png)
+
 
 ### Admin page:
 
