@@ -41,9 +41,17 @@
                     Sales Report
                 </a>
 
-                <a href="ship.jsp?orderId=1">Test Ship orderId=1</a>
+                <a href="ship.jsp?orderId=1" class ="list-group-item list-group-item-action">
+                    Test Ship orderId=1
+                </a>
 
-                <a href="ship.jsp?orderId=3">Test Ship orderId=3</a>
+                <a href="ship.jsp?orderId=3" class ="list-group-item list-group-item-action">
+                    Test Ship orderId=3
+                </a>
+
+                <a href="loaddata.jsp" class="list-group-item list-group-item-action text-danger">
+                    Reset Database
+                </a>
 
             </div>
 
