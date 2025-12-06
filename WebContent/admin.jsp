@@ -3,9 +3,6 @@
 
 <%@ taglib prefix="shop" tagdir="/WEB-INF/tags" %>
 
-<%@ page import="java.sql.*" %>
-<%@ page import="java.text.NumberFormat" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,61 +15,50 @@
 <%
     String username = (String) session.getAttribute("authenticatedUser");
     if (username == null || !username.equals("admin304")) {
-        response.sendRedirect("index.jsp");
+%>
+    <script>
+        window.location.href = "index.jsp";
+    </script>
+<%
         return;
     }
 %>
 
-<h1 class="text-center mt-4 mb-3">Admin Sales Report by Day</h1>
-<div class="container mt-3">
+<div class="container mt-4">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <table class="table table-striped table-bordered table-sm text-center">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Order Date</th>
-                        <th scope="col">Total Sales Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <%
-                    String sql =
-                        "SELECT CONVERT(DATE, orderDate) AS orderDate, " +
-                        "       SUM(totalAmount) AS totalAmount " +
-                        "FROM ordersummary " +
-                        "GROUP BY CONVERT(DATE, orderDate) " +
-                        "ORDER BY CONVERT(DATE, orderDate) DESC";
+        <div class="col-md-6 text-center">
 
-                    try {
-                        getConnection();
-                        PreparedStatement ps = con.prepareStatement(sql);
-                        ResultSet rs = ps.executeQuery();
-                        NumberFormat money = NumberFormat.getCurrencyInstance();
+            <h2 class="mb-4">Admin Portal</h2>
 
-                        while (rs.next()) {
-                            String orderDate = rs.getString("orderDate");
-                            double totalAmount = rs.getDouble("totalAmount");
-                %>
-                            <tr>
-                                <td><%= orderDate %></td>
-                                <td><%= money.format(totalAmount) %></td>
-                            </tr>
-                <%
-                        }
+            <div class="list-group">
+                <a href="listcustomers.jsp" class="list-group-item list-group-item-action">
+                    List All Customers
+                </a>
+                <a href="listorder.jsp" class="list-group-item list-group-item-action">
+                    List All Orders
+                </a>
+                <a href="listsales.jsp" class="list-group-item list-group-item-action">
+                    Sales Report
+                </a>
 
-                        rs.close();
-                        ps.close();
-                        closeConnection();
-                    } catch (SQLException e) {
-                        out.println("<tr><td colspan='2'>Error generating sales report: "
-                                    + e.getMessage() + "</td></tr>");
-                    }
-                %>
-                </tbody>
-            </table>
+                <a href="ship.jsp?orderId=1" class ="list-group-item list-group-item-action">
+                    Test Ship orderId=1
+                </a>
+
+                <a href="ship.jsp?orderId=3" class ="list-group-item list-group-item-action">
+                    Test Ship orderId=3
+                </a>
+
+                <a href="loaddata.jsp" class="list-group-item list-group-item-action text-danger">
+                    Reset Database
+                </a>
+
+            </div>
+
         </div>
     </div>
 </div>
+
 
 
 </body>

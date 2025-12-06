@@ -11,6 +11,6 @@
   </welcome-file-list>
   <context-param>
     <param-name>siteTitle</param-name>
-    <param-value>45's Grocery</param-value>
+    <param-value>All The Manga</param-value>
   </context-param>
 </web-app>
