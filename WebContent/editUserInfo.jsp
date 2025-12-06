@@ -32,11 +32,11 @@
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                address = rs.getString("address");
-                city = rs.getString("city");
-                state = rs.getString("state");
-                postalCode = rs.getString("postalCode");
-                country = rs.getString("country");
+                address = rs.getString("address") != null ? rs.getString("address") : "";
+                city = rs.getString("city") != null ? rs.getString("city") : "";
+                state = rs.getString("state") != null ? rs.getString("state") : "";
+                postalCode = rs.getString("postalCode") != null ? rs.getString("postalCode") : "";
+                country = rs.getString("country") != null ? rs.getString("country") : "";
             }
 
             rs.close();
