@@ -104,7 +104,7 @@
         updated = true;
     } catch (SQLException e) {
         errors.add("Error updating account info: " + e.getMessage());
-        request.setAttribute("errors", errors);
+        request.setAttribute("editErrors", errors);
         request.getRequestDispatcher("editUserInfo.jsp").forward(request, response);
     } finally {
         closeConnection();
