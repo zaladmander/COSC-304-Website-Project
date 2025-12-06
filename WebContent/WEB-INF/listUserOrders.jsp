@@ -1,11 +1,20 @@
 <%@ page import="java.sql.*, java.text.NumberFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="jdbc.jsp" %>
+<%@ include file="/WEB-INF/jdbc.jsp" %>
+<%@ include file="/WEB-INF/escapeHTML.jsp" %>
 
 <%
     String userId = request.getParameter("userId");
+
+    if (userId == null || userId.trim().isEmpty()) {
+        out.println("<p>Invalid user ID.</p>");
+        return;
+    }
+
     NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
     try {
         getConnection();
 
@@ -18,10 +27,11 @@
             "WHERE c.userid = ? " +
             "ORDER BY o.orderDate DESC";
 
-        PreparedStatement pstmt = con.prepareStatement(sql);
+        pstmt = con.prepareStatement(sql);
         pstmt.setString(1, userId);
-        ResultSet rs = pstmt.executeQuery();
-
+        rs = pstmt.executeQuery();
+%>
+<%
         if (!rs.next()) {
             out.println("<p>You have no orders.</p>");
             rs.close();
@@ -30,47 +40,73 @@
             return;
         }
 %>
-
-<table border="1" cellpadding="5" cellspacing="0">
-    <tr>
-        <th>Order #</th>
-        <th>Date</th>
-        <th>Total</th>
-        <th>Ship To</th>
-    </tr>
-
-<%
-        while (rs.next()) {
-            int orderId = rs.getInt("orderId");
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Order #</th>
+            <th>Date</th>
+            <th>Total</th>
+            <th>Ship To</th>
+        </tr>
+    </thead>
+    <tbody>
+<%  
+        do {
 %>
-    <tr>
-        <td>
-            <%= orderId %>
-        </td>
+        <tr>
+            <td><%= rs.getInt("orderId") %></td>
+            <td><%= rs.getTimestamp("orderDate") %></td>
+            <td><%= currFormat.format(rs.getDouble("totalAmount")) %></td>
+            <%
+            String shipAddr   = rs.getString("shiptoAddress");
+            String shipCity   = rs.getString("shiptoCity");
+            String shipState  = rs.getString("shiptoState");
+            String shipPostal = rs.getString("shiptoPostalCode");
+            String shipCountry= rs.getString("shiptoCountry");
 
-        <td><%= rs.getTimestamp("orderDate") %></td>
+            boolean hasShip =
+                (shipAddr   != null && !shipAddr.trim().isEmpty()) ||
+                (shipCity   != null && !shipCity.trim().isEmpty()) ||
+                (shipState  != null && !shipState.trim().isEmpty()) ||
+                (shipPostal != null && !shipPostal.trim().isEmpty()) ||
+                (shipCountry!= null && !shipCountry.trim().isEmpty());
+            %>
 
-        <td><%= currFormat.format(rs.getDouble("totalAmount")) %></td>
-
-        <!-- all location info grouped together -->
-        <td>
-            <%= rs.getString("shiptoAddress") %><br/>
-            <%= rs.getString("shiptoCity") %>,
-            <%= rs.getString("shiptoState") %>
-            <%= rs.getString("shiptoPostalCode") %><br/>
-            <%= rs.getString("shiptoCountry") %>
-        </td>
-    </tr>
+            <td>
+            <% if (hasShip) { %>
+                <%= escapeHtml(shipAddr) %><br/>
+                <%= escapeHtml(shipCity) %>
+                <% if (shipState != null && !shipState.trim().isEmpty()) { %>,
+                    <%= escapeHtml(shipState) %>
+                <% } %><br/>
+                <%= escapeHtml(shipPostal) %><br/>
+                <%= escapeHtml(shipCountry) %>
+            <% } else { %>
+                N/A
+            <% } %>
+            </td>
+        </tr>
 <%
-        }
-
-        rs.close();
-        pstmt.close();
-        closeConnection();
+        } while (rs.next());
+%>
+    </tbody>
+</table>
+<%
     } catch (SQLException e) {
+        // Log the exception server-side for debugging
+        System.err.println("Error loading user orders:");
+        e.printStackTrace(System.err);
 %>
-    <p style="color:red;">Error loading your orders: <%= e.getMessage() %></p>
+    <p style="color:red;">Error loading your orders. Please try again later.</p>
 <%
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pstmt != null) pstmt.close();
+            closeConnection();
+        } catch (SQLException e) {
+            System.err.println("Error closing resources:");
+            e.printStackTrace(System.err);
+        }
     }
 %>
-</table>

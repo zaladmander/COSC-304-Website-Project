@@ -10,11 +10,12 @@
 <body>
     <jsp:include page="/WEB-INF/header.jsp" />
 
-    <h1>Your Orders</h1>
+    <div class="container mt-5" style="max-width: 800px;">
+        <h2 class="mb-4">Your Orders</h2>
 
-    <jsp:include page="/WEB-INF/listUserOrders.jsp">
-        <jsp:param name="userId" value="${sessionScope.authenticatedUser}" />
-    </jsp:include>
-
+        <jsp:include page="/WEB-INF/listUserOrders.jsp">
+            <jsp:param name="userId" value="${sessionScope.authenticatedUser}" />
+        </jsp:include>
+    </div>
 </body>
 </html>
