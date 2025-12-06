@@ -1,17 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/escapeHTML.jsp" %>
 
-<%!
-    private String escapeHtml(String s) {
-        if (s == null) return "";
-        // order matters: escape & first
-        s = s.replace("&", "&amp;");
-        s = s.replace("<", "&lt;");
-        s = s.replace(">", "&gt;");
-        s = s.replace("\"", "&quot;");
-        s = s.replace("'", "&#x27;");
-        return s;
-    }
-%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <%
     String loggedInUser = (String) session.getAttribute("authenticatedUser");
