@@ -84,7 +84,8 @@
             if (pstmt != null) pstmt.close();
             closeConnection();
         } catch (SQLException e) {
-            // log error
+            System.err.println("Error closing resources:");
+            e.printStackTrace(System.err);
         }
     }
 %>
