@@ -45,7 +45,16 @@ else
 		out.print("<tr><td>"+product.get(0)+"</td>");
 		out.print("<td>"+product.get(1)+"</td>");
 
-		out.print("<td align=\"center\">"+product.get(3)+"</td>");
+		out.print(
+			"<td align=\"center\">" +
+				"<form method=\"post\" action=\"updatecart.jsp\" style=\"display:inline\">" +
+					"<input type=\"hidden\" name=\"id\" value=\"" + product.get(0) + "\" />" +
+					"<input type=\"number\" name=\"quantity\" min=\"1\" value=\"" + product.get(3) + "\" style=\"width:60px; text-align:right;\" />" +
+					"<input type=\"submit\" value=\"Update\" />" +
+				"</form>" +
+			"</td>"
+		);
+
 		Object price = product.get(2);
 		Object itemqty = product.get(3);
 		double pr = 0;
