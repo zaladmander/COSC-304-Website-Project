@@ -252,6 +252,211 @@ SET productImageURL = 'img/tgre9.avif'
 WHERE productName = 'Tokyo Ghoul:re, Vol. 9';
 
 
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'Bleach (3-in-1 Edition), Vol. 1',
+    1,
+    'Ichigo Kurosaki becomes a Substitute Soul Reaper after gaining powers from Rukia, pulling him into battles against Hollows and the mysteries of the spirit world.',
+    19.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/bleach3in1v1.avif'
+WHERE productName = 'Bleach (3-in-1 Edition), Vol. 1';
+
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'Bleach: Can’t Fear Your Own World, Vol. 1',
+    1,
+    'Following the aftermath of the Thousand-Year Blood War, Shuhei Hisagi is drawn into a conspiracy threatening Soul Society as new shadows rise from the chaos.',
+    19.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/bleachcfyow1.avif'
+WHERE productName = 'Bleach: Can’t Fear Your Own World, Vol. 1';
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'Bleach, Vol. 71',
+    1,
+    'As the final battles of the Thousand-Year Blood War intensify, Ichigo and his allies face overwhelming threats while hidden truths about Yhwach’s power come to light.',
+    12.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/bleach71.avif'
+WHERE productName = 'Bleach, Vol. 71';
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'Bleach, Vol. 74',
+    1,
+    'The final confrontation of the Thousand-Year Blood War erupts as Ichigo faces Yhwach in a desperate battle to decide the fate of Soul Society once and for all.',
+    12.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/bleach74.avif'
+WHERE productName = 'Bleach, Vol. 74';
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'Bleach, Vol. 24: Immanent God Blues',
+    1,
+    'As the Arrancar threat escalates, Ichigo pushes deeper into conflict while grappling with the unstable power of his Hollow within.',
+    12.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/bleach24.avif'
+WHERE productName = 'Bleach, Vol. 24: Immanent God Blues';
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'Bleach, Vol. 34: King of the Kill',
+    1,
+    'Ichigo’s battle against Grimmjow reaches its brutal climax as both fighters unleash everything they have in a desperate struggle for dominance.',
+    12.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/bleach34.avif'
+WHERE productName = 'Bleach, Vol. 34: King of the Kill';
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'Bleach, Vol. 57: Out of Bloom',
+    1,
+    'The sudden invasion of the Wandenreich plunges Soul Society into chaos as the Quincy unleash overwhelming power, forcing Ichigo into a desperate race to return.',
+    12.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/bleach57.avif'
+WHERE productName = 'Bleach, Vol. 57: Out of Bloom';
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'JoJo''s Bizarre Adventure Part 7: Steel Ball Run, Vol. 4',
+    1,
+    'Johnny and Gyro push deeper into the Steel Ball Run race as new Stand users close in, forcing them into brutal confrontations across the deadly American landscape.',
+    26.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/sbr4.avif'
+WHERE productName = 'JoJo''s Bizarre Adventure Part 7: Steel Ball Run, Vol. 4';
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'JoJo''s Bizarre Adventure Part 7: Steel Ball Run, Vol. 1',
+    1,
+    'The Steel Ball Run race begins as Johnny Joestar, a former jockey, crosses paths with the mysterious Gyro Zeppeli and the deadly power of the Spin.',
+    26.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/sbr1.avif'
+WHERE productName = 'JoJo''s Bizarre Adventure Part 7: Steel Ball Run, Vol. 1';
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'JoJo''s Bizarre Adventure Part 7: Steel Ball Run, Vol. 3',
+    1,
+    'Johnny and Gyro continue their advance in the Steel Ball Run race, facing lethal Stand abilities as rival racers close in across the treacherous terrain.',
+    26.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/sbr3.avif'
+WHERE productName = 'JoJo''s Bizarre Adventure Part 7: Steel Ball Run, Vol. 3';
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'JoJo''s Bizarre Adventure Part 2: Battle Tendency, Vol. 3',
+    1,
+    'Joseph Joestar clashes with the Pillar Men as their terrifying powers escalate, pushing him into deadly battles that demand every trick he can muster.',
+    12.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/bt3.avif'
+WHERE productName = 'JoJo''s Bizarre Adventure Part 2: Battle Tendency, Vol. 3';
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'JoJo''s Bizarre Adventure Part 2: Battle Tendency, Vol. 1',
+    1,
+    'Joseph Joestar is dragged into a new war against the ancient Pillar Men, beginning a chaotic clash of wits, ridiculous tactics, and escalating supernatural power.',
+    12.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/bt1.avif'
+WHERE productName = 'JoJo''s Bizarre Adventure Part 2: Battle Tendency, Vol. 1';
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'JoJo''s Bizarre Adventure Part 1: Phantom Blood, Vol. 3',
+    1,
+    'Jonathan Joestar faces Dio’s monstrous rise as their final confrontation erupts, pushing the limits of Hamon and sealing the tragic fate of the Joestar bloodline’s beginning.',
+    12.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/pb3.avif'
+WHERE productName = 'JoJo''s Bizarre Adventure Part 1: Phantom Blood, Vol. 3';
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'JoJo''s Bizarre Adventure Part 4: Diamond Is Unbreakable, Vol. 6',
+    1,
+    'Josuke and the gang close in on new Stand threats in Morioh as the escalating mystery draws them toward deadly confrontations hidden within the quiet town.',
+    19.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/diu6.avif'
+WHERE productName = 'JoJo''s Bizarre Adventure Part 4: Diamond Is Unbreakable, Vol. 6';
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'Dandadan, Vol. 14',
+    1,
+    'As Momo, Okarun, and their chaotic crew confront escalating supernatural threats, new enemies emerge and the stakes rise in their battle to protect those they care about.',
+    14.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/dandadan14.avif'
+WHERE productName = 'Dandadan, Vol. 14';
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'Jujutsu Kaisen, Vol. 23',
+    1,
+    'The chaos of the Culling Game intensifies as sorcerers clash with overwhelming curses, forcing Yuji and his allies into brutal battles that push them past their limits.',
+    12.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/jjk23.avif'
+WHERE productName = 'Jujutsu Kaisen, Vol. 23';
+
+INSERT INTO product (productName, categoryId, productDesc, productPrice)
+VALUES (
+    'Chainsaw Man, Vol. 18',
+    1,
+    'As new devils and shifting alliances shake the fragile balance of the world, Denji is dragged deeper into chaos, forced to confront enemies who know exactly how to break him.',
+    12.99
+);
+
+UPDATE Product
+SET productImageURL = 'img/csm18.avif'
+WHERE productName = 'Chainsaw Man, Vol. 18';
+
 
 
 
