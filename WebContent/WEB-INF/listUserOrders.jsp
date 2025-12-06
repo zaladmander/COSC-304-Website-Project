@@ -1,6 +1,6 @@
 <%@ page import="java.sql.*, java.text.NumberFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="jdbc.jsp" %>
+<%@ include file="/WEB-INF/jdbc.jsp" %>
 
 <%
     String userId = request.getParameter("userId");
