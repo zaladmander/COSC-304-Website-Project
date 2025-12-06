@@ -77,7 +77,7 @@
                     <div class="alert alert-danger">
                         <ul class="mb-0">
                             <% for (String err : errors) { %>
-                                <li><%= err %></li>
+                                <li><%= escapeHtml(err) %></li>
                             <% } %>
                         </ul>
                     </div>
