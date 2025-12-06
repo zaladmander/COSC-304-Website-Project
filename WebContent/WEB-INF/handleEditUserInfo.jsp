@@ -64,7 +64,7 @@
             errors.add("Passwords do not match.");
         }
 
-        if (!password.matches("^(?=.*[0-9])(?=.*[!@#$%^&*()\\[\\]{}\\\\\\-_=+;:\"',.<>?/\\\\]).{6,100}$")) {
+        if (!password.matches("^(?=.*[0-9])(?=.*[!@#$%^&*()\\[\\]{}\\-_=+;:\"',.<>?/\\]).{6,100}$")) {
             errors.add("Password must be at least 6 characters, include a number and a special character.");
         }
     }
