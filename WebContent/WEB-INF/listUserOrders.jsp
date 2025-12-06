@@ -40,38 +40,56 @@
             return;
         }
 %>
-<table border="1" cellpadding="5" cellspacing="0">
-    <tr>
-        <th>Order #</th>
-        <th>Date</th>
-        <th>Total</th>
-        <th>Ship To</th>
-    </tr>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Order #</th>
+            <th>Date</th>
+            <th>Total</th>
+            <th>Ship To</th>
+        </tr>
+    </thead>
+    <tbody>
 <%  
         do {
-            int orderId = rs.getInt("orderId");
 %>
-    <tr>
-        <td>
-            <%= orderId %>
-        </td>
+        <tr>
+            <td><%= rs.getInt("orderId") %></td>
+            <td><%= rs.getTimestamp("orderDate") %></td>
+            <td><%= currFormat.format(rs.getDouble("totalAmount")) %></td>
+            <%
+            String shipAddr   = rs.getString("shiptoAddress");
+            String shipCity   = rs.getString("shiptoCity");
+            String shipState  = rs.getString("shiptoState");
+            String shipPostal = rs.getString("shiptoPostalCode");
+            String shipCountry= rs.getString("shiptoCountry");
 
-        <td><%= rs.getTimestamp("orderDate") %></td>
+            boolean hasShip =
+                (shipAddr   != null && !shipAddr.trim().isEmpty()) ||
+                (shipCity   != null && !shipCity.trim().isEmpty()) ||
+                (shipState  != null && !shipState.trim().isEmpty()) ||
+                (shipPostal != null && !shipPostal.trim().isEmpty()) ||
+                (shipCountry!= null && !shipCountry.trim().isEmpty());
+            %>
 
-        <td><%= currFormat.format(rs.getDouble("totalAmount")) %></td>
-
-        <!-- all location info grouped together -->
-        <td>
-            <%= escapeHtml(rs.getString("shiptoAddress")) %><br/>
-            <%= escapeHtml(rs.getString("shiptoCity")) %>,
-            <%= escapeHtml(rs.getString("shiptoState")) %>
-            <%= escapeHtml(rs.getString("shiptoPostalCode")) %><br/>
-            <%= escapeHtml(rs.getString("shiptoCountry")) %>
-        </td>
-    </tr>
+            <td>
+            <% if (hasShip) { %>
+                <%= escapeHtml(shipAddr) %><br/>
+                <%= escapeHtml(shipCity) %>
+                <% if (shipState != null && !shipState.trim().isEmpty()) { %>,
+                    <%= escapeHtml(shipState) %>
+                <% } %><br/>
+                <%= escapeHtml(shipPostal) %><br/>
+                <%= escapeHtml(shipCountry) %>
+            <% } else { %>
+                N/A
+            <% } %>
+            </td>
+        </tr>
 <%
         } while (rs.next());
 %>
+    </tbody>
 </table>
 <%
     } catch (SQLException e) {
